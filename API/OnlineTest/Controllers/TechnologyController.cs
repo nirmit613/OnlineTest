@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineTest.Services.DTO.AddDTO;
 using OnlineTest.Services.DTO.UpdateDTO;
 using OnlineTest.Services.Interface;
+using System.Security.Claims;
 
 namespace OnlineTest.Controllers
 {
@@ -42,14 +43,14 @@ namespace OnlineTest.Controllers
         public IActionResult AddTechnology(AddTechnologyDTO technology)
         {
 
-            return Ok(_technologyService.AddTechnology(technology));
+            return Ok(_technologyService.AddTechnology(Convert.ToInt32(User.FindFirstValue("Id")), technology));
         }
 
         [HttpPut]
         public IActionResult UpdateTechnology(UpdateTechnologyDTO technology)
         {
 
-            return Ok(_technologyService.UpdateTechnology(technology));
+            return Ok(_technologyService.UpdateTechnology(Convert.ToInt32(User.FindFirstValue("Id")), technology));
         }
         [HttpDelete]
         public IActionResult DeleteTechnology(int id)

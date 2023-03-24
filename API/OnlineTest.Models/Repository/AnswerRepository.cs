@@ -7,11 +7,18 @@ namespace OnlineTest.Models.Repository
 {
     public class AnswerRepository:IAnswerRepository
     {
+        #region Fields
         private readonly OnlineTestContext _context;
+        #endregion
+
+        #region Constructors
         public AnswerRepository(OnlineTestContext context)
         {
             _context = context;
         }
+        #endregion
+
+        #region Methods
         public IEnumerable<Answer> GetAnswers()
         {
             return _context.Answers.Where(a => a.IsActive == true).ToList();
@@ -36,20 +43,18 @@ namespace OnlineTest.Models.Repository
         {
             return _context.Answers.FirstOrDefault(a => a.Id == id && a.IsActive == true);
         }
-        public bool IsAnswerExists(int testId, int questionId, string ans)
+        
+        public Answer IsAnswerExists(int testId, int questionId, string ans)
         {
             var result = (from qam in _context.QuestionAnswerMapping
                           join a in _context.Answers
                           on qam.AnswerId equals a.Id
                           where qam.TestId == testId && qam.QuestionId == questionId && a.Ans == ans
-                          select new
+                          select new Answer
                           {
-                              Id = qam.Id
+                              Id = a.Id
                           }).FirstOrDefault();
-            if (result != null)
-                return true;
-            else
-                return false;
+            return result;
         }
         public int AddAnswer(Answer answer)
         {
@@ -70,5 +75,6 @@ namespace OnlineTest.Models.Repository
             _context.Entry(answer).Property("IsActive").IsModified = true;
             return _context.SaveChanges() > 0;
         }
+        #endregion
     }
 }

@@ -10,8 +10,8 @@ namespace OnlineTest.Services.Interface
         ResponseDTO GetTechnologyPagination(int PageNo, int RowsPerPage);
         ResponseDTO GetTechnologybyId(int id);
         ResponseDTO GetTechnologyByName(string name);
-        ResponseDTO AddTechnology(AddTechnologyDTO test);
-        ResponseDTO UpdateTechnology(UpdateTechnologyDTO test);
+        ResponseDTO AddTechnology(int userId, AddTechnologyDTO test);
+        ResponseDTO UpdateTechnology(int userId, UpdateTechnologyDTO test);
         ResponseDTO DeleteTechnology(int id);
     }
 }

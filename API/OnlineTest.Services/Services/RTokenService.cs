@@ -1,31 +1,47 @@
-﻿using OnlineTest.Model;
-using OnlineTest.Model.Interfaces;
-using OnlineTest.Services.Interface;
+﻿using AutoMapper;
+using OnlineTest.Models;
+using OnlineTest.Models.Interfaces;
+using OnlineTest.Services.DTO;
+using OnlineTest.Services.DTO.AddDTO;
+using OnlineTest.Services.DTO.GetDTO;
+using OnlineTest.Services.DTO.UpdateDTO;
+using OnlineTest.Services.Interfaces;
 
 namespace OnlineTest.Services.Services
 {
     public class RTokenService : IRTokenService
     {
+        #region Fields
+        private readonly IMapper _mapper;
         private readonly IRTokenRepository _rTokenRepository;
-        public RTokenService(IRTokenRepository rTokenRepository)
-        {
+        #endregion
 
+        #region Constructor
+        public RTokenService(IMapper mapper, IRTokenRepository rTokenRepository)
+        {
+            _mapper = mapper;
             _rTokenRepository = rTokenRepository;
         }
+        #endregion
 
-        public bool AddToken(RToken token)
+        #region Methods
+        public GetRTokenDTO GetRefreshToken(RefreshDTO user)
         {
-            return _rTokenRepository.Add(token);
+            var result = _rTokenRepository.GetRefreshToken(user.Id, user.RefreshToken);
+            if (result == null)
+                return null;
+            return _mapper.Map<GetRTokenDTO>(result);
         }
 
-        public bool ExpireToken(RToken token)
+        public bool AddRefreshToken(AddRTokenDTO rToken)
         {
-            return _rTokenRepository.Expire(token);
+            return _rTokenRepository.AddRefreshToken(_mapper.Map<RToken>(rToken));
         }
 
-        public RToken GetToken(string refreshToken)
+        public bool ExpireRefreshToken(UpdateRTokenDTO rToken)
         {
-            return _rTokenRepository.Get(refreshToken);
+            return _rTokenRepository.ExpireRefreshToken(_mapper.Map<RToken>(rToken));
         }
+        #endregion
     }
 }

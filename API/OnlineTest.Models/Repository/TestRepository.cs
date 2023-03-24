@@ -1,18 +1,23 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnlineTest.Data;
-using OnlineTest.Models;
+﻿using OnlineTest.Data;
 using OnlineTest.Models.Interfaces;
-using System.Collections.Generic;
 
 namespace OnlineTest.Models.Repository
 {
     public class TestRepository:ITestRepository
     {
+        #region Fields
         private readonly OnlineTestContext _context;
+        #endregion
+
+        #region Constructors
         public TestRepository(OnlineTestContext context)
         {
             _context = context;
         }
+        #endregion
+
+        #region Methods
+
         public IEnumerable<Test> GetTests()
         {
             return _context.Tests.Where(t => t.IsActive == true).ToList();
@@ -30,13 +35,10 @@ namespace OnlineTest.Models.Repository
         {
             return _context.Tests.Where(t => t.TechnologyId == technologyId && t.IsActive == true).ToList();
         }
-        public bool IsTestExists(int technologyId, string testName)
+        public Test IsTestExists(Test test)
         {
-            var result = _context.Tests.FirstOrDefault(t => t.TechnologyId == technologyId && t.TestName == testName && t.IsActive == true);
-            if (result != null)
-                return true;
-            else
-                return false;
+            var result = _context.Tests.FirstOrDefault(t => t.TechnologyId == test.TechnologyId && t.TestName == test.TestName && t.IsActive == true);
+            return result;
         }
         public int AddTest(Test test)
         {
@@ -60,7 +62,7 @@ namespace OnlineTest.Models.Repository
             return _context.SaveChanges() > 0;
         }
 
-       
+        #endregion
     }
 }
 

@@ -1,18 +1,22 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnlineTest.Data;
-using OnlineTest.Models;
+﻿using OnlineTest.Data;
 using OnlineTest.Models.Interfaces;
 
 namespace OnlineTest.Models.Repository
 {
-
     public class TechnologyRepository : ITechnologyRepository
     {
+        #region Fields
         private readonly OnlineTestContext _context;
+        #endregion
+
+        #region Constructors
         public TechnologyRepository(OnlineTestContext context)
         {
             _context = context;
         }
+        #endregion
+        #region Methods
+
         public IEnumerable<Technology> GetTechnology()
         {
             return _context.Technologies.Where(t => t.IsActive == true).ToList();
@@ -52,5 +56,7 @@ namespace OnlineTest.Models.Repository
             _context.Entry(technology).Property("IsActive").IsModified = true;
             return _context.SaveChanges() > 0;
         }
+
+        #endregion
     }
 }

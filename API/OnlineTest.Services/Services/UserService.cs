@@ -259,9 +259,9 @@ namespace OnlineTest.Services.Services
             return response;
         }
 
-        public GetUserDTO IsUserExists(TokenDTO user)
+        public GetUserDTO IsUserExists(LoginDTO user)
         {
-            var result = _userRepository.GetUserByEmail(user.Username);
+            var result = _userRepository.GetUserByEmail(user.Email);
             if (result == null || result.Password != _hasherService.Hash(user.Password))
                 return null;
             return _mapper.Map<GetUserDTO>(result);

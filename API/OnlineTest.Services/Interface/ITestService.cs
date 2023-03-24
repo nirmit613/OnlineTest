@@ -10,8 +10,11 @@ namespace OnlineTest.Services.Interface
         ResponseDTO GetTestById(int id);
         ResponseDTO GetTestsPagination(int PageNo, int RowsPerPage);
         ResponseDTO GetTestsByTechnologyId(int technologyId);
-        ResponseDTO AddTest(AddTestDTO test);
+        ResponseDTO AddTest(int userId, AddTestDTO test);
         ResponseDTO UpdateTest(UpdateTestDTO test);
         ResponseDTO DeleteTest(int id);
+        ResponseDTO AddTestLink(int adminId, int testId, string email);
+        ResponseDTO GetTestByLink(string token, string email);
     }
 }
+

@@ -16,6 +16,12 @@ namespace OnlineTest.Services.AutoMapperProfile
             CreateMap<UpdateUserDTO, User>();
             #endregion
 
+            #region Token
+            CreateMap<RToken, GetRTokenDTO>();
+            CreateMap<AddRTokenDTO, RToken>();
+            CreateMap<UpdateRTokenDTO, RToken>();
+            #endregion
+
             #region Technology
             CreateMap<Technology, GetTechnologyDTO>();
             CreateMap<AddTechnologyDTO, Technology>();
@@ -25,8 +31,13 @@ namespace OnlineTest.Services.AutoMapperProfile
             #region Test
             CreateMap<Test, GetTestDTO>();
             CreateMap<AddTestDTO, Test>();
-            CreateMap<UpdateTechnologyDTO, Test>();
+            CreateMap<UpdateTestDTO, Test>();
             #endregion
+
+            #region TestLink
+            CreateMap<AddTLinkDTO, TestLink>();
+            #endregion
+
 
             #region Question
             CreateMap<Question, GetQuestionDTO>();

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineTest.Services.DTO.AddDTO;
 using OnlineTest.Services.DTO.UpdateDTO;
 using OnlineTest.Services.Interface;
+using System.Security.Claims;
 
 namespace OnlineTest.Controllers
 {
@@ -14,6 +15,7 @@ namespace OnlineTest.Controllers
         #region Field
         private readonly ITestService _testService;
         #endregion
+
         #region Constructor
         public TestController(ITestService testService)
         {
@@ -44,7 +46,7 @@ namespace OnlineTest.Controllers
         public IActionResult AddTest(AddTestDTO test)
         {
 
-            return Ok(_testService.AddTest(test));
+            return Ok(_testService.AddTest(Convert.ToInt32(User.FindFirstValue("Id")), test));
         }
 
         [HttpPut]
@@ -57,6 +59,17 @@ namespace OnlineTest.Controllers
         public IActionResult DeleteTest(int id)
         {
             return Ok(_testService.DeleteTest(id));
+        }
+        [HttpPost("link")]
+        public IActionResult AddTestLink(int testId, string email)
+        {
+            return Ok(_testService.AddTestLink(Convert.ToInt32(User.FindFirstValue("Id")), testId, email));
+        }
+
+        [HttpGet("link")]
+        public IActionResult GetTestByLink(string token, string email)
+        {
+            return Ok(_testService.GetTestByLink(token, email));
         }
         #endregion
 

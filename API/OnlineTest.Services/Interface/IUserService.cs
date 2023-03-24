@@ -14,7 +14,7 @@ namespace OnlineTest.Services.Interface
         ResponseDTO AddUser(AddUserDTO user);
         ResponseDTO UpdateUser(UpdateUserDTO user);
         ResponseDTO DeleteUser(int id);
-        GetUserDTO IsUserExists(TokenDTO user);
+        GetUserDTO IsUserExists(LoginDTO user);
     }
 }
 

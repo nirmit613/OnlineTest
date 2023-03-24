@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineTest.Services.DTO.AddDTO;
 using OnlineTest.Services.DTO.UpdateDTO;
 using OnlineTest.Services.Interface;
+using System.Security.Claims;
 
 namespace OnlineTest.Controllers
 {
@@ -36,7 +37,7 @@ namespace OnlineTest.Controllers
         [HttpPost]
         public IActionResult AddQuestion(AddQuestionDTO question)
         {
-            return Ok(_questionService.AddQuestion(question));
+            return Ok(_questionService.AddQuestion(Convert.ToInt32(User.FindFirstValue("Id")), question));
         }
 
         [HttpPut]

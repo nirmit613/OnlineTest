@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OnlineTest.Services.DTO.AddDTO;
 using OnlineTest.Services.DTO.UpdateDTO;
 using OnlineTest.Services.Interface;
+using System.Security.Claims;
 
 namespace OnlineTest.Controllers
 {
@@ -22,14 +23,14 @@ namespace OnlineTest.Controllers
         #endregion
         #region Methods
         [HttpGet]
-        public IActionResult GetAnswers()
+        public IActionResult GetAnswersByQuestionId(int questionId)
         {
-            return Ok(_answerService.GetAnswers());
+            return Ok(_answerService.GetAnswersByQuestionId(questionId));
         }
         [HttpPost]
         public IActionResult AddQuestion(AddAnswerDTO answer)
         {
-            return Ok(_answerService.AddAnswer(answer));
+            return Ok(_answerService.AddAnswer(Convert.ToInt32(User.FindFirstValue("Id")), answer));
         }
 
         [HttpPut]

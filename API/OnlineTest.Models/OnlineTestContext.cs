@@ -22,12 +22,13 @@ namespace OnlineTest.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
-        public DbSet<RToken> RToken { get; set; }
+        public DbSet<RToken> RTokens { get; set; }
         public DbSet<Technology> Technologies { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<QuestionAnswerMap> QuestionAnswerMapping{ get; set; }
+        public DbSet<TestLink> TestLinks { get; set; }
 
     }
 }

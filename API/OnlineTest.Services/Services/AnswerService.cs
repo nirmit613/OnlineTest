@@ -29,12 +29,20 @@ namespace OnlineTest.Services.Services
         }
         #endregion
         #region Methods
-        public ResponseDTO GetAnswers()
+        public ResponseDTO GetAnswersByQuestionId(int questionId)
         {
             var response = new ResponseDTO();
             try
             {
-                var data = _mapper.Map<List<GetAnswerDTO>>(_answerRepository.GetAnswers().ToList());
+                var questionById = _questionRepository.GetQuestionById(questionId);
+                if (questionById == null)
+                {
+                    response.Status = 404;
+                    response.Message = "Not Found";
+                    response.Error = "Question not found";
+                    return response;
+                }
+                var data = _mapper.Map<List<GetAnswerDTO>>(_answerRepository.GetAnswersByQuestionId(questionId).ToList());
                 response.Status = 200;
                 response.Message = "Ok";
                 response.Data = data;
@@ -74,7 +82,7 @@ namespace OnlineTest.Services.Services
             }
             return response;
         }
-        public ResponseDTO AddAnswer(AddAnswerDTO answer)
+        public ResponseDTO AddAnswer(int userId, AddAnswerDTO answer)
         {
             var response = new ResponseDTO();
             try
@@ -95,8 +103,8 @@ namespace OnlineTest.Services.Services
                     response.Error = "Question not found";
                     return response;
                 }
-                var existFlag = _answerRepository.IsAnswerExists(answer.TestId, answer.QuestionId, answer.Ans);
-                if (existFlag)
+                var answerExists = _answerRepository.IsAnswerExists(answer.TestId, answer.QuestionId, answer.Ans);
+                if (answerExists != null)
                 {
                     response.Status = 400;
                     response.Message = "Not Created";
@@ -104,6 +112,7 @@ namespace OnlineTest.Services.Services
                     return response;
                 }
                 answer.IsActive = true;
+                answer.CreatedBy = userId;
                 answer.CreatedOn = DateTime.UtcNow;
                 var answerId = _answerRepository.AddAnswer(_mapper.Map<Answer>(answer));
                 if (answerId == 0)
@@ -149,8 +158,8 @@ namespace OnlineTest.Services.Services
                     response.Error = "Answer not found";
                     return response;
                 }
-                var existFlag = _answerRepository.IsAnswerExists(answer.TestId, answer.QuestionId, answer.Ans);
-                if (existFlag)
+                var answerExists = _answerRepository.IsAnswerExists(answer.TestId, answer.QuestionId, answer.Ans);
+                if (answerExists != null && answer.Id != answerExists.Id)
                 {
                     response.Status = 400;
                     response.Message = "Not Updated";

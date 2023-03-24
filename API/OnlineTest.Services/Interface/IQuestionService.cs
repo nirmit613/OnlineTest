@@ -8,7 +8,7 @@ namespace OnlineTest.Services.Interface
     {
         ResponseDTO GetQuestionsByTestId(int testId);
         ResponseDTO GetQuestionById(int id);
-        ResponseDTO AddQuestion(AddQuestionDTO question);
+        ResponseDTO AddQuestion(int userId,AddQuestionDTO question);
         ResponseDTO UpdateQuestion(UpdateQuestionDTO question);
         ResponseDTO DeleteQuestion(int id);
     }

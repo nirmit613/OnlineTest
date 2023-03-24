@@ -1,17 +1,21 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnlineTest.Data;
-using OnlineTest.Models;
+﻿using OnlineTest.Data;
 using OnlineTest.Models.Interfaces;
 
 namespace OnlineTest.Models.Repository
 {
     public class QuestionRepository : IQuestionRepository
     {
+        #region Fields
         private readonly OnlineTestContext _context;
+        #endregion
+        #region Constructors
         public QuestionRepository(OnlineTestContext context)
         {
             _context = context;
         }
+        #endregion
+        #region Methods
+
         public IEnumerable<Question> GetQuestionsByTestId(int testId)
         {
             return _context.Questions.Where(q => q.TestId == testId && q.IsActive == true).ToList();
@@ -22,13 +26,10 @@ namespace OnlineTest.Models.Repository
             return _context.Questions.FirstOrDefault(q => q.Id == id && q.IsActive == true);
 
         }
-        public bool IsQuestionExists(int testId, string que)
+        public Question IsQuestionExists(Question question)
         {
-            var result = _context.Questions.FirstOrDefault(q => q.TestId == testId && q.Que == que && q.IsActive == true);
-            if (result != null)
-                return true;
-            else
-                return false;
+            var result = _context.Questions.FirstOrDefault(q => q.TestId == question.TestId && q.Que == question.Que && q.IsActive == true);
+            return result;
         }
 
         public int AddQuestion(Question question)
@@ -52,6 +53,8 @@ namespace OnlineTest.Models.Repository
             _context.Entry(question).Property("IsActive").IsModified = true;
             return _context.SaveChanges() > 0;
         }
+
+        #endregion
     }
 }
 

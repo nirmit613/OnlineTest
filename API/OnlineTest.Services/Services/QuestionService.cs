@@ -14,14 +14,16 @@ namespace OnlineTest.Services.Services
         #region Fields
         private readonly IQuestionRepository _questionRepository;
         private readonly ITestRepository _testRepository;
+        private readonly IAnswerRepository _answerRepository;
         private readonly IMapper _mapper;
         #endregion
 
         #region Constructors
-        public QuestionService(IMapper mapper,IQuestionRepository questionRepository, ITestRepository testRepository)
+        public QuestionService(IAnswerRepository answerRepository,IMapper mapper,IQuestionRepository questionRepository, ITestRepository testRepository)
         {
             _questionRepository = questionRepository;
             _testRepository = testRepository;
+            _answerRepository = answerRepository;
             _mapper = mapper;
         }
 
@@ -63,15 +65,16 @@ namespace OnlineTest.Services.Services
             var response = new ResponseDTO();
             try
             {
-                var test = _questionRepository.GetQuestionById(id);
-                if (test == null)
+                var question = _questionRepository.GetQuestionById(id);
+                if (question == null)
                 {
                     response.Status = 404;
                     response.Message = "Not Found";
                     response.Error = "Question not found";
                     return response;
                 }
-                var data = _mapper.Map<GetQuestionDTO>(test);
+                var data = _mapper.Map<GetQuestionDTO>(question);
+                data.Answers = _mapper.Map<List<GetAnswerDTO>>(_answerRepository.GetAnswersByQuestionId(question.Id).ToList());
                 response.Status = 200;
                 response.Message = "Ok";
                 response.Data = data;
@@ -85,7 +88,7 @@ namespace OnlineTest.Services.Services
             return response;
         }
        
-        public ResponseDTO AddQuestion(AddQuestionDTO question)
+        public ResponseDTO AddQuestion(int userId,AddQuestionDTO question)
         {
             
             var response = new ResponseDTO();
@@ -99,8 +102,8 @@ namespace OnlineTest.Services.Services
                     response.Error = "Test does not exist";
                     return response;
                 }
-                var existFlag = _questionRepository.IsQuestionExists(question.TestId, question.Que);
-                if (existFlag)
+                var questionExists = _questionRepository.IsQuestionExists(_mapper.Map<Question>(question));
+                if (questionExists != null)
                 {
                     response.Status = 400;
                     response.Message = "Not Created";
@@ -108,6 +111,7 @@ namespace OnlineTest.Services.Services
                     return response;
                 }
                 question.IsActive = true;
+                question.CreatedBy = userId;
                 question.CreatedOn = DateTime.UtcNow;
                 var questionId = _questionRepository.AddQuestion(_mapper.Map<Question>(question));
                 if (questionId == 0)
@@ -143,8 +147,8 @@ namespace OnlineTest.Services.Services
                     response.Error = "Question not found";
                     return response;
                 }
-                var existFlag = _questionRepository.IsQuestionExists(questionById.TestId, question.Que);
-                if (existFlag)
+                var questionExists = _questionRepository.IsQuestionExists(_mapper.Map<Question>(question));
+                if (questionExists != null && question.Id != questionExists.Id)
                 {
                     response.Status = 400;
                     response.Message = "Not Updated";

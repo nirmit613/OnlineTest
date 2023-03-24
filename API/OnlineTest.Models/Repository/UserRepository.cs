@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using OnlineTest.Data;
+﻿using OnlineTest.Data;
 using OnlineTest.Model.Interfaces;
 using OnlineTest.Models;
 
@@ -7,11 +6,18 @@ namespace OnlineTest.Model.Repository
 {
     public class UserRepository : IUserRepository
     {
+        #region Fields
         private readonly OnlineTestContext _context;
+        #endregion
+
+        #region Constructors
         public UserRepository(OnlineTestContext context)
         {
             _context = context;
         }
+        #endregion
+
+        #region Methods
 
         public IEnumerable<User> GetUsers()
         {
@@ -41,7 +47,7 @@ namespace OnlineTest.Model.Repository
         }
         public bool UpdateUser(User user)
         {
-            _context.Entry(user).Property("MobileNo").IsModified = true;
+            _context.Entry(user).Property("MobileNumber").IsModified = true;
             _context.Entry(user).Property("Email").IsModified = true;
             return _context.SaveChanges() > 0;
         }
@@ -51,5 +57,6 @@ namespace OnlineTest.Model.Repository
             return _context.SaveChanges() > 0;
         }
 
+        #endregion
     }
 }

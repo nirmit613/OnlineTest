@@ -11,7 +11,7 @@ namespace OnlineTest.Models.Interfaces
     {
         IEnumerable<Question> GetQuestionsByTestId(int testId);
         Question GetQuestionById(int id);
-        bool IsQuestionExists(int testId, string que);
+        Question IsQuestionExists(Question question);
         int AddQuestion(Question question);  
         bool UpdateQuestion(Question question);
         bool DeleteQuestion(Question question);

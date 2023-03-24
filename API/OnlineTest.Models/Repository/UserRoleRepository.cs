@@ -26,7 +26,7 @@ namespace OnlineTest.Models.Repository
         #region Methods
         public List<string> GetRoles(int userId)
         {
-            var result = _context.UserRoles.Where(u => u.UserId == userId).ToList();
+            var result = _context.UserRoles.Where(u => u.UserId == userId).ToList().OrderBy(i=>i.RoleId);
             List<string> roles = new List<string>();
             foreach (var row in result)
             {

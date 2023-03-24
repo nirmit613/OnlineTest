@@ -11,7 +11,7 @@ namespace OnlineTest.Models.Interfaces
     {
         IEnumerable<Answer> GetAnswers();
         IEnumerable<Answer> GetAnswersByQuestionId(int questionId);
-        bool IsAnswerExists(int testId, int questionId, string ans);
+        Answer IsAnswerExists(int testId, int questionId, string ans);
         Answer GetAnswerById(int id);
         int AddAnswer(Answer answer);
         bool UpdateAnswer(Answer answer);
