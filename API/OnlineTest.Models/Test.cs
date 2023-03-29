@@ -18,7 +18,7 @@ namespace OnlineTest.Models
         public DateTime? ExpireOn { get; set; }
 
         [ForeignKey("Technology")]
-        public int TechnologyId { get; set; } //fk
+        public int TechnologyId { get; set; } 
         public bool IsActive { get; set; }
         public Technology Technology { get; set; }
 

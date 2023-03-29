@@ -48,6 +48,63 @@ namespace OnlineTest.Models.Migrations
                     b.ToTable("Answers");
                 });
 
+            modelBuilder.Entity("OnlineTest.Models.AnswerSheet", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AnswerId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedTime")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("QuestionId")
+                        .HasColumnType("int");
+
+                    b.Property<Guid>("Token")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AnswersSheet");
+                });
+
+            modelBuilder.Entity("OnlineTest.Models.MailOutBound", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Body")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("TestLinkId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("To")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("TestLinkId");
+
+                    b.ToTable("MailOutBounds");
+                });
+
             modelBuilder.Entity("OnlineTest.Models.Question", b =>
                 {
                     b.Property<int>("Id")
@@ -351,6 +408,17 @@ namespace OnlineTest.Models.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("UserRoles");
+                });
+
+            modelBuilder.Entity("OnlineTest.Models.MailOutBound", b =>
+                {
+                    b.HasOne("OnlineTest.Models.TestLink", "TestLink")
+                        .WithMany()
+                        .HasForeignKey("TestLinkId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("TestLink");
                 });
 
             modelBuilder.Entity("OnlineTest.Models.Question", b =>

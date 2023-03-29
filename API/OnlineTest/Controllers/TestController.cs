@@ -60,6 +60,7 @@ namespace OnlineTest.Controllers
         {
             return Ok(_testService.DeleteTest(id));
         }
+        
         [HttpPost("link")]
         public IActionResult AddTestLink(int testId, string email)
         {
@@ -67,11 +68,15 @@ namespace OnlineTest.Controllers
         }
 
         [HttpGet("link")]
-        public IActionResult GetTestByLink(string token, string email)
+        public IActionResult GetTestByLink(Guid token, string email)
         {
             return Ok(_testService.GetTestByLink(token, email));
         }
+        [HttpPost("submit")]
+        public IActionResult SubmitTest(AddAnswerSheetDTO answerSheet)
+        {
+            return Ok(_testService.SubmitTest(answerSheet));
+        }
         #endregion
-
     }
 }

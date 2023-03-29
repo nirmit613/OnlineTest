@@ -29,6 +29,8 @@ namespace OnlineTest.Data
         public DbSet<Answer> Answers { get; set; }
         public DbSet<QuestionAnswerMap> QuestionAnswerMapping{ get; set; }
         public DbSet<TestLink> TestLinks { get; set; }
+        public DbSet<AnswerSheet> AnswersSheet { get; set;}
+        public DbSet<MailOutBound> MailOutBounds { get; set; }
 
     }
 }

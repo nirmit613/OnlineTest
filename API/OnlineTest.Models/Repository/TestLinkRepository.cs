@@ -9,7 +9,7 @@ namespace OnlineTest.Models.Repository
         private readonly OnlineTestContext _context;
         #endregion
 
-        #region Constructor
+        #region Constructors
         public TestLinkRepository(OnlineTestContext context)
         {
             _context = context;
@@ -43,8 +43,8 @@ namespace OnlineTest.Models.Repository
         public bool UpdateTestLink(TestLink testLink)
         {
             _context.Entry(testLink).Property("AccessOn").IsModified = true;
-            //_context.Entry(testLink).Property("Attempts").IsModified = true;
-            //_context.Entry(testLink).Property("SubmitOn").IsModified = true;
+            _context.Entry(testLink).Property("Attempts").IsModified = true;
+            _context.Entry(testLink).Property("SubmitOn").IsModified = true;
             //_context.Entry(testLink).Property("").IsModified = true;
             return _context.SaveChanges() > 0;
         }

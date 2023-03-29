@@ -10,6 +10,7 @@ C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\AutoMappe
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Azure.Core.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Azure.Identity.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Humanizer.dll
+C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\MailKit.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Microsoft.Bcl.AsyncInterfaces.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
@@ -39,8 +40,11 @@ C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Microsoft
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Microsoft.OpenApi.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Microsoft.SqlServer.Server.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\MimeKit.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Mono.TextTemplating.dll
+C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\NETCore.MailKit.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\BouncyCastle.Crypto.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Nirmit Valand\Desktop\Project\API\OnlineTest\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll

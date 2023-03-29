@@ -18,7 +18,7 @@ namespace OnlineTest.Models.Repository
 
         public IEnumerable<Question> GetQuestionsByTestId(int testId)
         {
-            return _context.Questions.Where(q => q.TestId == testId && q.IsActive == true).ToList();
+            return _context.Questions.Where(q => q.TestId == testId && q.IsActive == true).OrderBy(q => q.SortOrder).ToList();
         }
 
         public Question GetQuestionById(int id)
